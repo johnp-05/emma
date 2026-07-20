@@ -1,10 +1,11 @@
 from typing import Any
 
-from core_engine.domain.tool_models import ToolResult
+from core_engine.contracts.tool_manager import IToolManager
+from core_engine.domain.tool_models import ToolDefinition, ToolResult
 from core_engine.tools.tool_registry import ToolRegistry
 
 
-class ToolManager:
+class ToolManager(IToolManager):
     def __init__(self, registry: ToolRegistry) -> None:
         self._registry = registry
 
@@ -32,12 +33,8 @@ class ToolManager:
                 error=str(exc),
             )
 
-    def list_definitions(self) -> list[dict[str, Any]]:
+    def list_definitions(self) -> list[ToolDefinition]:
         return [
-            {
-                "name": tool.definition.name,
-                "description": tool.definition.description,
-                "parameters": tool.definition.parameters,
-            }
+            tool.definition
             for tool in self._registry.all()
         ]
