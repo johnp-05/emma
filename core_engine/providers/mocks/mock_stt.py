@@ -10,4 +10,4 @@ class MockSTTProvider(ISTTProvider):
 
         await asyncio.sleep(1)
 
-        return "Hola Emma"
+        return "Emma, abre el Bloc de notas."

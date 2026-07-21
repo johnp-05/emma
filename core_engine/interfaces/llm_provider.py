@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
 
+from core_engine.domain.llm_result import LLMResult
+
 
 class ILLMProvider(ABC):
-    """Contrato para cualquier proveedor de modelos de lenguaje."""
-
     @abstractmethod
-    async def generate_response(self, prompt: str) -> str:
-        """Genera una respuesta a partir de un texto."""
-        pass
+    async def generate_response(
+        self,
+        user_message: str,
+    ) -> LLMResult:
+        raise NotImplementedError
